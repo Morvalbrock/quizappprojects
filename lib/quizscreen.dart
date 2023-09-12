@@ -10,18 +10,11 @@ class Quizscteen extends StatefulWidget {
 }
 
 class _QuizscteenState extends State<Quizscteen> {
-  Widget? activeScreen;
-  @override
-  void initState() {
-    activeScreen = StartScreen(switchScreen);
-    super.initState();
-  }
+  var activeScreen = 'start-screen';
 
   void switchScreen() {
-// activeScreen value was change so this was called in setstate
-//setstate usage build method was re-execute the build method
     setState(() {
-      activeScreen = const QuestionScreen();
+      activeScreen = 'question-screen';
     });
   }
 
@@ -40,9 +33,9 @@ class _QuizscteenState extends State<Quizscteen> {
               end: Alignment.bottomRight,
             ),
           ),
-          // starting time child value was Startscreen than run a
-          //switchscreen than child value was change
-          child: activeScreen,
+          child: activeScreen == 'start-screen'
+              ? StartScreen(switchScreen)
+              : QuestionScreen(),
         ),
       ),
     );
